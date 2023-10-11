@@ -125,6 +125,14 @@ public class QuestionController {
         if (tags != null) {
             question.setTags(GSON.toJson(tags));
         }
+        List<JudgeCase> judgeCase = questionUpdateRequest.getJudgeCase();
+        if (judgeCase != null) {
+            question.setJudgeCase(GSON.toJson(judgeCase));
+        }
+        JudgeConfig judgeConfig = questionUpdateRequest.getJudgeConfig();
+        if (judgeConfig != null) {
+            question.setJudgeConfig(GSON.toJson(judgeConfig));
+        }
         // 参数校验
         questionService.validQuestion(question, false);
         long id = questionUpdateRequest.getId();
@@ -135,8 +143,32 @@ public class QuestionController {
         return ResultUtils.success(result);
     }
 
+
     /**
      * 根据 id 获取
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/get")
+    public BaseResponse<Question> getQuestionById(long id, HttpServletRequest request) {
+        if (id <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Question question = questionService.getById(id);
+        if (question == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        User loginUser = userService.getLoginUser(request);
+        // 不是本人或管理员,不能直接获取所有信息
+        if (!question.getUserId().equals(loginUser.getId()) && !userService.isAdmin(loginUser)) {
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
+        }
+        return ResultUtils.success(question);
+    }
+
+    /**
+     * 根据 id 获取(脱敏)
      *
      * @param id
      * @return
@@ -196,6 +228,7 @@ public class QuestionController {
                 questionService.getQueryWrapper(questionQueryRequest));
         return ResultUtils.success(questionService.getQuestionVOPage(questionPage, request));
     }
+
     /**
      * 分页获取题目列表（仅管理员）
      *
