@@ -5,7 +5,7 @@ import com.xlei.cyoj3.judge.codesandbox.model.ExecuteCodeRequest;
 import com.xlei.cyoj3.judge.codesandbox.model.ExecuteCodeResponse;
 
 /**
- * 第三方代码沙箱
+ * 第三方代码沙箱(待实现)
  */
 public class ThirPartyCodeSandbox implements CodeSandbox {
     @Override
