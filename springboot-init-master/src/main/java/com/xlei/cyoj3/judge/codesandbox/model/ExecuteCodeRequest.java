@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 代码沙箱接口定义
+ */
 @Data
 @Builder
 @NoArgsConstructor
