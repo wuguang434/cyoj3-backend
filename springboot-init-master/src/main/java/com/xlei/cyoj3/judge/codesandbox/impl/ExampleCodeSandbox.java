@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+/**
+ * 示例代码沙箱
+ */
 @Slf4j
 public class ExampleCodeSandbox implements CodeSandbox {
     @Override
@@ -17,6 +20,7 @@ public class ExampleCodeSandbox implements CodeSandbox {
         List<String> inputList = executeCodeRequest.getInputList();
         ExecuteCodeResponse executeCodeResponse = new ExecuteCodeResponse();
         executeCodeResponse.setOutputList(inputList);
+        System.out.println("示例代码沙箱");
         executeCodeResponse.setMessage("测试执行成功");
         executeCodeResponse.setStatus(QuestionSubmitStatusEnum.SUCCEED.getValue());
         JudgeInfo judgeInfo = new JudgeInfo();
