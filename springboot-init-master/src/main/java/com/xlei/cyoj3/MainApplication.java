@@ -21,7 +21,7 @@ public class MainApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
-        System.out.println("===========项目启动成功===========");
+        System.out.println("===========后端项目启动成功===========");
     }
 
 }
