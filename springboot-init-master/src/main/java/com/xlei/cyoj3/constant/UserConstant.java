@@ -29,5 +29,9 @@ public interface UserConstant {
      */
     String BAN_ROLE = "ban";
 
-    // endregion
+    /**
+     * 默认头像
+     */
+    //String USER_DEFAULT_AVATAR = "https://p3-passport.byteimg.com/img/user-avatar/2ea9106b748a0b88d5bfcf517a4dc2ef~180x180.awebp";
+
 }
