@@ -5,7 +5,7 @@ import com.xlei.cyoj3.judge.codesandbox.impl.RemoteCodeSandbox;
 import com.xlei.cyoj3.judge.codesandbox.impl.ThirPartyCodeSandbox;
 
 /**
- * 代码沙箱工程(根据字符串参数创建指定的代码沙箱实例
+ * 代码沙箱工厂(根据字符串参数创建指定的代码沙箱实例)
  */
 public class CodeSandboxFactory {
     /**
