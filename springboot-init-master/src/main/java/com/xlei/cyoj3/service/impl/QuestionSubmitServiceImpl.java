@@ -82,6 +82,17 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         if (question == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
+
+        //设置提交数
+        Question updateQuestions = questionService.getById(questionId);
+        synchronized (question.getSubmitNum()) {
+            int submitNumber = question.getSubmitNum() + 1;
+            updateQuestions.setSubmitNum(submitNumber);
+            boolean save = questionService.updateById(updateQuestions);
+            if (!save) {
+                throw new BusinessException(ErrorCode.OPERATION_ERROR, "数据保存失败");
+            }
+        }
         // 是否已提交题目
         long userId = loginUser.getId();
         // 每个用户串行提交题目
@@ -95,7 +106,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         questionSubmit.setJudgeInfo("{}");
         boolean save = this.save(questionSubmit);
         if (!save) {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据插入失败");
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据保存失败");
         }
         Long questionSubmitId = questionSubmit.getId();
         //执行判题服务
