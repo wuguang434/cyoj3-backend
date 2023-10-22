@@ -91,7 +91,7 @@ public class CodeMqConsumer {
         } catch (Exception e) {
             //返回的信息为空,则拒收消息,并放入死信队列
             channel.basicNack(deliverTag, false, false);
-            e.printStackTrace();
+           throw new RuntimeException(e);
         }
     }
 }
