@@ -8,8 +8,8 @@ public interface MqConstant {
     /**
      * 普通交换机
      */
-    String CODE_EXCHANGE_NAME="code_exchange";
-    String CODE_QUEUE="code_queue";
+    String CODE_EXCHANGE_NAME="code_exchange_single";
+    String CODE_QUEUE="code_queue_single";
     String CODE_ROUTING_KEY="code_routingKey";
     String CODE_DIRECT_EXCHANGE="direct";
 
