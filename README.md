@@ -36,10 +36,10 @@ github仓库：
 
 ### 首页
 
-![首页](./img/main.png)
+![首页](springboot-init-master/img/main.png)
 ### 题目详情页
 
-![做题页面](./img/answerQuestion.png)
+![做题页面](springboot-init-master/img/answerQuestion.png)
 
 ----
 ## 后端技术点
@@ -316,35 +316,35 @@ javaCopy codepublic class ExecuteExternalProcess {
 
 ---
 
-### 模板方法模式
+### 使用模板方法模式
 
-l由于原生和Docker代码沙箱的实现流程完全一致（保存为文件、编译、执行、获取输出、清理），使用模板方法模式定义了一套标准的流程并允许子类自行拓展，大幅减少冗余代码
+由于原生和Docker代码沙箱的实现流程完全一致（保存为文件、编译、执行、获取输出、清理），使用模板方法模式定义了一套标准的流程并允许子类自行拓展，大幅减少冗余代码
 
 ---
 ### 用户登录注册
 
-![用户注册](./img/register.png)
-![用户登录](./img/login.png)
+![用户注册](springboot-init-master/img/register.png)
+![用户登录](springboot-init-master/img/login.png)
 
 ### 管理员创建题目
 
-![创建题目](./img/createQuestion.png)
+![创建题目](springboot-init-master/img/createQuestion.png)
 
 ### 题目管理
 
-![题目管理](./img/manageQuestion.png)
+![题目管理](springboot-init-master/img/manageQuestion.png)
 
 ### 修改题目信息
 
-![修改题目信息](./img/changeQuestion.png)
+![修改题目信息](springboot-init-master/img/changeQuestion.png)
 
 ### 用户管理（管理员）
 
-![用户管理](./img/manageUser.png)
+![用户管理](springboot-init-master/img/manageUser.png)
 
 ### 提交题目展示
 
-![提交题目展示](./img/submitAnswer.png)
+![提交题目展示](springboot-init-master/img/submitAnswer.png)
 
 ---
 
