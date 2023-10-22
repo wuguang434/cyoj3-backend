@@ -24,7 +24,12 @@
 本项目是基于 Spring Boot + Spring Cloud Alibaba 微服务 + Docker + RabbitMQ + Vue 3 的 **编程算法题目在线评测系统（简称OJ）**。在线访问该系统，用户可以选择题目、编写代码并提交代码进行评测，通过高效、稳定的在线判题评测系统进行代码的编译、运行和结果判定。
 
 ---
+### 做题页面
 
+![做题页面](./img/answerQuestion.png)
+### 修改题目信息
+
+![修改题目信息](./img/changeQuestion.png)
 ## 🛠 项目功能
 
 ### 1️⃣ 题目模块
@@ -43,7 +48,6 @@
 - 注册
 - 登录（微服务中使用JWT Token实现登录，在网关层面获取token登录消息，实现用户鉴权）
 - 用户管理（管理员）
-- 用户上传头像功能（使用阿里云对象存储OSS存储图片）
 - 用户限流（使用Redisson实现简单且高效分布式限流，限制用户每秒只能提交一次题目，防止用户恶意占用系统资源）
 
 ### 3️⃣ 判题模块
@@ -100,7 +104,7 @@
 - cyuoj-backend-gateway：系统网关模块
 - cyuoj-backend-judge-service：系统判题模块
 - cyuoj-backend-model：系统实体模块
-- shier-backend-question-service：系统题目模块
+- cyuoj-backend-question-service：系统题目模块
 - cyuoj-backend-service-client：系统内部调用模块
 - cyuoj-backend-user-service：系统用户模块
 
@@ -156,9 +160,6 @@
 
 ![首页](./img/main.png)
 
-### 做题页面
-
-![做题页面](./img/img.png)
 
 ### 用户登录注册
 
@@ -173,9 +174,6 @@
 
 ![题目管理](./img/manageQuestion.png)
 
-### 修改题目信息
-
-![修改题目信息](./img/changeQuestion.png)
 
 ### 用户管理（管理员）
 
@@ -184,7 +182,7 @@
 
 ### 提交题目展示
 
-![提交题目展示](./img/README-1694249803014.png)
+![提交题目展示](./img/submitAnswer.png)
 
 ---
 
