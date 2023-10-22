@@ -20,6 +20,7 @@ import com.xlei.cyoj3.model.enums.QuestionSubmitStatusEnum;
 import com.xlei.cyoj3.model.vo.QuestionSubmitVO;
 import com.xlei.cyoj3.model.vo.QuestionVO;
 import com.xlei.cyoj3.model.vo.UserVO;
+import com.xlei.cyoj3.mq.CodeMyProducer;
 import com.xlei.cyoj3.service.QuestionService;
 import com.xlei.cyoj3.service.QuestionSubmitService;
 import com.xlei.cyoj3.service.QuestionSubmitService;
@@ -41,6 +42,9 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import static com.xlei.cyoj3.constant.MqConstant.CODE_EXCHANGE_NAME;
+import static com.xlei.cyoj3.constant.MqConstant.CODE_ROUTING_KEY;
+
 /**
  * @author 12100
  * @description 针对表【question_submit(题目提交)】的数据库操作Service实现
@@ -59,6 +63,9 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     @Resource
     @Lazy
     private JudgeService judgeService;
+
+    @Resource
+    private CodeMyProducer codeMyProducer;
 
     /**
      * 提交题目
@@ -109,10 +116,12 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据保存失败");
         }
         Long questionSubmitId = questionSubmit.getId();
-        //执行判题服务
-        CompletableFuture.runAsync(() -> {
-            judgeService.doJudge(questionSubmitId);
-        });
+        codeMyProducer.sendMessage(CODE_EXCHANGE_NAME, CODE_ROUTING_KEY, String.valueOf(questionId));
+
+//        //执行判题服务
+//        CompletableFuture.runAsync(() -> {
+//            judgeService.doJudge(questionSubmitId);
+//        });
         return questionSubmitId;
     }
 
