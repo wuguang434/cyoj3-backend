@@ -10,6 +10,7 @@ import com.xlei.cyoj3.common.ResultUtils;
 import com.xlei.cyoj3.constant.UserConstant;
 import com.xlei.cyoj3.exception.BusinessException;
 import com.xlei.cyoj3.exception.ThrowUtils;
+import com.xlei.cyoj3.manager.RedisLimiterManager;
 import com.xlei.cyoj3.model.dto.question.*;
 import com.xlei.cyoj3.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.xlei.cyoj3.model.dto.questionsubmit.QuestionSubmitQueryRequest;
@@ -38,6 +39,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/question")
 @Slf4j
+@CrossOrigin(originPatterns = {"http://localhost:8080", "http://oj.kongshier.top"}, allowCredentials = "true")
 public class QuestionController {
 
     @Resource
@@ -46,6 +48,8 @@ public class QuestionController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private RedisLimiterManager redisLimiter;
     private final static Gson GSON = new Gson();
 
     // region 增删改查
@@ -302,8 +306,13 @@ public class QuestionController {
         if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 登录才能点赞
+        // 登录才能提交
         final User loginUser = userService.getLoginUser(request);
+        //对提交进行限流
+        boolean rateLimit = redisLimiter.doRateLimit(loginUser.getId().toString());
+        if (!rateLimit) {
+            return ResultUtils.error(ErrorCode.TOO_MANY_REQUEST, "提交过于频繁请稍后再试");
+        }
         long questionSubmitId = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
         return ResultUtils.success(questionSubmitId);
     }
