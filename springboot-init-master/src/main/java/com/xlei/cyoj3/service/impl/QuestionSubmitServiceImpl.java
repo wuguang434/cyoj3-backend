@@ -116,7 +116,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据保存失败");
         }
         Long questionSubmitId = questionSubmit.getId();
-        codeMyProducer.sendMessage(CODE_EXCHANGE_NAME, CODE_ROUTING_KEY, String.valueOf(questionId));
+        codeMyProducer.sendMessage(CODE_EXCHANGE_NAME, CODE_ROUTING_KEY, String.valueOf(questionSubmitId));
 
 //        //执行判题服务
 //        CompletableFuture.runAsync(() -> {
