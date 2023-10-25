@@ -50,7 +50,7 @@ public class JudgeServiceImpl implements JudgeService {
         }
         //2)如果题目提交状态不为等待中,就不用重复执行了
         if (!questionSubmit.getStatus().equals(QuestionSubmitStatusEnum.WAITING.getValue())) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "题目正在判题中");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "题目正在判题中,请前往已提交页面查看");
         }
         //3)更改判题(题目提交)的主管那台为"判题中",防止重复执行
         QuestionSubmit questionSubmitUpdate = new QuestionSubmit();
