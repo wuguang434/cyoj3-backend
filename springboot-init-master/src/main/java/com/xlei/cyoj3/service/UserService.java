@@ -8,7 +8,6 @@ import com.xlei.cyoj3.model.vo.LoginUserVO;
 import com.xlei.cyoj3.model.vo.UserVO;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 
 /**
  * 用户服务
